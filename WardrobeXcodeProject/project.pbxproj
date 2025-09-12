@@ -1,0 +1,92 @@
+// !$*UTF8*$!
+{
+    archiveVersion = 1;
+    classes = {
+    };
+    objectVersion = 56;
+    objects = {
+
+/* Begin PBXFileReference section */
+        1F0F9E0C29ABCD0000000001 /* WardrobeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeApp.swift; sourceTree = "<group>"; };
+        1F0F9E0C29ABCD0000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+        1F0F9E0C29ABCD0000000003 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+        1F0F9E0C29ABCD0000000004 /* BackgroundRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRemover.swift; sourceTree = "<group>"; };
+        1F0F9E0C29ABCD0000000005 /* CollageCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageCanvas.swift; sourceTree = "<group>"; };
+        1F0F9E0C29ABCD0000000006 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+        1F0F9E0C29ABCD0000000007 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+        1F0F9E0C29ABCD0000000010 = {
+            isa = PBXGroup;
+            children = (
+                1F0F9E0C29ABCD0000000011 /* WardrobeXcodeProject */,
+            );
+            sourceTree = "<group>";
+        };
+        1F0F9E0C29ABCD0000000011 /* WardrobeXcodeProject */ = {
+            isa = PBXGroup;
+            children = (
+                1F0F9E0C29ABCD0000000001 /* WardrobeApp.swift */,
+                1F0F9E0C29ABCD0000000002 /* ContentView.swift */,
+                1F0F9E0C29ABCD0000000003 /* PhotoPicker.swift */,
+                1F0F9E0C29ABCD0000000004 /* BackgroundRemover.swift */,
+                1F0F9E0C29ABCD0000000005 /* CollageCanvas.swift */,
+                1F0F9E0C29ABCD0000000006 /* Models.swift */,
+                1F0F9E0C29ABCD0000000007 /* Utilities.swift */,
+            );
+            path = WardrobeXcodeProject;
+            sourceTree = "<group>";
+        };
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+        1F0F9E0C29ABCD0000000020 /* Project object */ = {
+            isa = PBXProject;
+            attributes = {
+                LastSwiftUpdateCheck = 1330;
+                LastUpgradeCheck = 1330;
+                ORGANIZATIONNAME = "ChatGPT";
+                TargetAttributes = {
+                    1F0F9E0C29ABCD0000000030 = {
+                        CreatedOnToolsVersion = 13.3;
+                    };
+                };
+            };
+            buildConfigurationList = 1F0F9E0C29ABCD0000000040 /* Build configuration list for PBXProject "WardrobeXcodeProject" */;
+            compatibilityVersion = "Xcode 13.0";
+            developmentRegion = en;
+            hasScannedForEncodings = 0;
+            knownRegions = (
+                en,
+                Base,
+            );
+            mainGroup = 1F0F9E0C29ABCD0000000010;
+            productRefGroup = 1F0F9E0C29ABCD0000000050 /* Products */;
+            projectDirPath = "";
+            projectRoot = "";
+            targets = (
+                1F0F9E0C29ABCD0000000030 /* WardrobeXcodeProject */,
+            );
+        };
+/* End PBXProject section */
+
+/* Begin PBXNativeTarget section */
+        1F0F9E0C29ABCD0000000030 /* WardrobeXcodeProject */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = 1F0F9E0C29ABCD0000000041 /* Build configuration list for PBXNativeTarget "WardrobeXcodeProject" */;
+            buildPhases = (
+            );
+            buildRules = (
+            );
+            dependencies = (
+            );
+            name = WardrobeXcodeProject;
+            productName = WardrobeXcodeProject;
+            productType = "com.apple.product-type.application";
+        };
+/* End PBXNativeTarget section */
+
+    };
+    rootObject = 1F0F9E0C29ABCD0000000020 /* Project object */;
+}
