@@ -1,144 +1,124 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showPicker = false
-    @State private var pickerCamera = false
-    @State private var pickedImage: UIImage?
-    @State private var processedImage: UIImage?
-    @State private var items: [ClothingItem] = []
-    @State private var layers: [LayerModel] = []
-    @State private var showingCanvas = false
-    @State private var isProcessing = false
-    @State private var statusText = ""
-
+    @StateObject var viewModel = WardrobeViewModel()
+    @State private var showImagePicker = false
+    @State private var selectedImage: UIImage?
+    @State private var itemName = ""
+    @State private var category = "Uncategorized"
+    
+    init() {
+        // Tab bar appearance
+        UITabBar.appearance().barTintColor = .black
+        UITabBar.appearance().unselectedItemTintColor = .gray
+        // Navigation bar appearance
+        UINavigationBar.appearance().barTintColor = .black
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
     var body: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    Button(action: { pickerCamera = false; showPicker = true }) {
-                        Label("Add Photo", systemImage: "photo.on.rectangle")
-                    }
-                    Spacer()
-                    Button(action: { pickerCamera = true; showPicker = true }) {
-                        Label("Take Photo", systemImage: "camera")
-                    }
-                    Spacer()
-                    Button(action: loadSavedItems) {
-                        Label("Refresh", systemImage: "arrow.clockwise")
-                    }
-                }.padding()
-
-                if let img = processedImage {
-                    Text("Processed preview")
-                    Image(uiImage: img).resizable().scaledToFit().frame(height: 180).padding()
-                }
-
-                if isProcessing {
-                    ProgressView(statusText)
-                        .padding()
-                }
-
-                List {
-                    Section(header: Text("Library")) {
-                        if items.isEmpty {
-                            Text("No items yet")
-                        } else {
-                            ForEach(items) { item in
-                                HStack {
-                                    if let ui = loadImageNamed(item.filename) {
-                                        Image(uiImage: ui).resizable().frame(width: 60, height: 60).cornerRadius(6)
-                                    } else {
-                                        Rectangle().fill(Color.gray).frame(width: 60, height: 60)
-                                    }
-                                    VStack(alignment: .leading) {
-                                        Text(item.name)
-                                        Text(item.category ?? "").font(.caption)
-                                    }
-                                    Spacer()
-                                    Button("Add to canvas") {
-                                        if let ui = loadImageNamed(item.filename) {
-                                            let layer = LayerModel(item: item, image: ui)
-                                            layers.append(layer)
-                                        }
-                                    }
-                                }
-                            }
+        TabView {
+            wardrobeTab
+            OutfitCanvasView(viewModel: viewModel)
+                .tabItem { Label("Builder", systemImage: "rectangle.3.offgrid") }
+            SavedOutfitsView(viewModel: viewModel)
+                .tabItem { Label("Outfits", systemImage: "star") }
+            WardrobeCategoriesView(viewModel: viewModel)
+                .tabItem { Label("Categories", systemImage: "square.grid.2x2") }
+        }
+        .accentColor(.white)
+        .background(Color.black.edgesIgnoringSafeArea(.all))
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(sourceType: .photoLibrary) { image in
+                selectedImage = image
+            }
+        }
+        .alert("Add Clothing Item", isPresented: Binding<Bool>(
+            get: { selectedImage != nil },
+            set: { if !$0 { selectedImage = nil } }
+        )) {
+            TextField("Name", text: $itemName)
+                .foregroundColor(.white)
+            Button("Save") {
+                if let img = selectedImage {
+                    img.removeBackground { processed in
+                        DispatchQueue.main.async {
+                            let finalImage = processed ?? img
+                            let predictedCategory = ClothingClassifier.shared.classify(name: itemName)
+                            viewModel.addItem(
+                                name: itemName.isEmpty ? "Untitled" : itemName,
+                                category: predictedCategory,
+                                image: finalImage
+                            )
+                            resetForm()
                         }
                     }
                 }
-
-                NavigationLink(destination: CollageCanvasView(layers: $layers), isActive: $showingCanvas) {
-                    EmptyView()
+            }
+            .foregroundColor(.white)
+            Button("Cancel", role: .cancel) { resetForm() }
+                .foregroundColor(.white)
+        }
+    }
+    
+    // MARK: - Wardrobe Tab
+    private var wardrobeTab: some View {
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(viewModel.filteredItems) { item in
+                        HStack {
+                            if let image = item.image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                                    .cornerRadius(8)
+                            }
+                            VStack(alignment: .leading) {
+                                Text(item.name)
+                                    .foregroundColor(.white)
+                                Text(item.category)
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    .onDelete(perform: deleteItem)
                 }
-
-                HStack {
-                    Button(action: { showingCanvas = true }) {
-                        Label("Open Canvas (\(layers.count))", systemImage: "square.on.square")
-                    }
-                    Spacer()
-                    Button(action: { exportAllSaved() }) {
-                        Label("Export Library", systemImage: "square.and.arrow.up")
-                    }
-                }.padding()
+                .listStyle(PlainListStyle())
+                .searchable(text: $viewModel.searchText)
+                .background(Color.black)
             }
             .navigationTitle("Wardrobe")
-            .sheet(isPresented: $showPicker, onDismiss: handlePickedImage) {
-                PhotoPicker(image: $pickedImage, sourceTypeCamera: pickerCamera)
-            }
-            .onAppear { loadSavedItems() }
-        }
-    }
-
-    func handlePickedImage() {
-        guard let img = pickedImage else { return }
-        isProcessing = true
-        statusText = "Removing background..."
-        BackgroundRemover.removeBackground(from: img) { result in
-            isProcessing = false
-            if let r = result {
-                processedImage = r
-                // Save PNG
-                let fname = "item-\(UUID().uuidString).png"
-                do {
-                    let _ = try savePNGToDocuments(r, filename: fname)
-                    let item = ClothingItem(id: UUID(), name: "Item \(items.count + 1)", filename: fname, category: nil, createdAt: Date())
-                    items.append(item)
-                } catch {
-                    print("Save failed: \(error)")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showImagePicker = true }) {
+                        Label("Add Item", systemImage: "plus")
+                            .foregroundColor(.white)
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
-            } else {
-                statusText = "Background removal failed"
             }
-            // reset picker
-            pickedImage = nil
+            .background(Color.black.edgesIgnoringSafeArea(.all))
         }
+        .tabItem { Label("Wardrobe", systemImage: "tshirt") }
     }
-
-    func loadSavedItems() {
-        items.removeAll()
-        let urls = listSavedItems()
-        for url in urls {
-            let name = url.lastPathComponent
-            let item = ClothingItem(id: UUID(), name: name, filename: name, category: nil, createdAt: Date())
-            items.append(item)
+    
+    // MARK: - Helper Functions
+    private func resetForm() {
+        selectedImage = nil
+        itemName = ""
+        category = "Uncategorized"
+    }
+    
+    private func deleteItem(at offsets: IndexSet) {
+        let allItems = viewModel.filteredItems
+        for index in offsets {
+            if let originalIndex = viewModel.items.firstIndex(of: allItems[index]) {
+                viewModel.items.remove(at: originalIndex)
+            }
         }
-    }
-
-    func loadImageNamed(_ filename: String) -> UIImage? {
-        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let url = docs.appendingPathComponent(filename)
-        return UIImage(contentsOfFile: url.path)
-    }
-
-    func exportAllSaved() {
-        // For demo: just print saved PNG paths
-        let urls = listSavedItems()
-        print("Saved library items:", urls)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
