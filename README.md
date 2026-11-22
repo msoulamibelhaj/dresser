@@ -1,43 +1,68 @@
-# Dresser 👗 — iOS Wardrobe & Outfit Organizer
+<div align="center">
 
-**Dresser** is an iPhone application project by **Mehdi Soulami** for organizing a digital wardrobe and planning outfits.
+# Dresser
 
-> Screenshots are from the actual iPhone application. Other applications on the iPhone home screen (Telegram, Drive, and Dott) are blurred to keep the focus on Dresser. A video walkthrough will be added when available. Features below are based on the provided screenshots; details that cannot be confirmed from them are not assumed.
+### Your wardrobe, your looks — in one place.
 
-## Application screenshots
+**An iOS wardrobe organizer and outfit planner.**  
+Designed as a clean, minimal experience for everyday outfit planning.
+
+[![iOS](https://img.shields.io/badge/Platform-iOS-111111?style=flat-square)](https://developer.apple.com/ios/)
+[![Xcode](https://img.shields.io/badge/IDE-Xcode-147EFB?style=flat-square)](https://developer.apple.com/xcode/)
+[![GitHub](https://img.shields.io/badge/Repository-Dresser-262626?style=flat-square)](https://github.com/msoulamibelhaj/dresser)
+
+<img src="docs/images/dresser-splash-screen.jpeg" alt="Dresser launch screen: black hanger and Dresser wordmark on white" width="215" />
+
+</div>
+
+---
+
+## Overview
+
+**Dresser** is a personal iPhone application for keeping track of clothes and organizing outfits through an uncluttered mobile interface.
+
+The app includes a wardrobe inventory, a search field, an **Outfits** view for saved combinations, and navigation tabs for **Wardrobe**, **Builder**, **Outfits**, and **Categories**.
+
+## App gallery
 
 | Wardrobe | Saved outfits |
-|:--:|:--:|
-| <img src="docs/images/dresser-wardrobe.jpeg" width="270" alt="Wardrobe screen with search and garments"> | <img src="docs/images/dresser-saved-outfits.jpeg" width="270" alt="Saved Outfits screen with Monday look"> |
+|:---:|:---:|
+| <img src="docs/images/dresser-wardrobe.jpeg" width="245" alt="Dresser wardrobe screen with clothes and search" /> | <img src="docs/images/dresser-saved-outfits.jpeg" width="245" alt="Dresser saved outfits screen showing an outfit for Monday" /> |
+| Clothing list and search | Your saved looks |
 
-| Home screen (other app icons blurred) | Launch screen |
-|:--:|:--:|
-| <img src="docs/images/dresser-home-screen.jpeg" width="270" alt="Dresser app icon in focus; Telegram, Drive, and Dott blurred on iPhone home screen"> | <img src="docs/images/dresser-splash-screen.jpeg" width="270" alt="Minimalist Dresser launch screen"> |
+| Home screen | Launch screen |
+|:---:|:---:|
+| <img src="docs/images/dresser-home-screen.jpeg" width="245" alt="iPhone home screen showing Dresser; other apps blurred" /> | <img src="docs/images/dresser-splash-screen.jpeg" width="245" alt="Dresser minimal splash screen, no signature" /> |
+| Dresser app icon (other apps blurred) | Updated logo and wordmark |
 
-## Features visible in the app
+## Features
 
-- **Digital wardrobe:** a clothing list with item imagery, garment names and types (for example, Tops and Bottoms).
-- **Search:** a search bar on the wardrobe screen for finding pieces.
-- **Outfits:** a Saved Outfits screen displaying a composed outfit and its assigned day (Monday in the example).
-- **Navigation:** a four-tab interface with **Wardrobe**, **Builder**, **Outfits**, and **Categories**.
-- **Minimal branding:** custom hanger icon, branded launch screen and a dark app interface.
+- **Wardrobe management:** Browse clothing items with thumbnail images, names, and categories.
+- **Search:** Find garments from the wardrobe screen.
+- **Saved outfits:** View previously saved combinations with day labels.
+- **Four-tab navigation:** Wardrobe, Builder, Outfits, and Categories.
+- **Minimal identity:** Custom hanger icon, matching launch screen, dark-mode in-app interface.
 
-The visible **Builder** and **Categories** tabs suggest related workflows, but the supplied images do not show their internal screens. Their detailed behavior can be documented after a video or code review.
+> The screenshots establish the visible interface. A full video demonstration and deeper implementation details can be added later. The Builder and Categories screens are shown as navigation tabs, but their internal workflows are not documented here.
 
-## Technology & repository
+## Tech & setup
 
 - **Platform:** iOS / iPhone
-- **Development environment:** Xcode (`Dresser.xcodeproj` in the repository)
-- **Interface assets:** the repository includes storyboards and `Assets.xcassets`
+- **Development:** Xcode project (`Dresser.xcodeproj`)
+- **Interface resources:** Storyboards and asset catalogs (`Assets.xcassets`)
 
-The exact implementation language and minimum supported iOS version should be checked against the project settings before listing them.
+To run locally:
 
-## Run locally
+```bash
+git clone https://github.com/msoulamibelhaj/dresser.git
+```
 
-1. Clone: `git clone https://github.com/msoulamibelhaj/dresser.git`
-2. On macOS, open `Dresser.xcodeproj` in Xcode.
-3. Choose a simulator or a connected iPhone, review signing, and build/run.
+Open `Dresser.xcodeproj` in Xcode on macOS, choose a simulator or connected iPhone, configure signing if necessary, and run the app.
 
-## Author 
+## Video demo
 
-**Mehdi Soulami** — [GitHub](https://github.com/msoulamibelhaj)
+Coming soon.
+
+## Author
+
+Made by [Mehdi Soulami](https://github.com/msoulamibelhaj).
