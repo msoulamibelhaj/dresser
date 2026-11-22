@@ -38,9 +38,6 @@ The exact implementation language and minimum supported iOS version should be ch
 2. On macOS, open `Dresser.xcodeproj` in Xcode.
 3. Choose a simulator or a connected iPhone, review signing, and build/run.
 
-## Video demo
-
-_A guided walkthrough will be added here when available._
 
 ## Author
 
