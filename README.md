@@ -2,7 +2,7 @@
 
 **Dresser** is an iPhone application project by **Mehdi Soulami** for organizing a digital wardrobe and planning outfits.
 
-> Screenshots are from the actual iPhone application. A video walkthrough will be added when available. Features below are based on the provided screenshots; details that cannot be confirmed from them are not assumed.
+> Screenshots are from the actual iPhone application. Other applications on the iPhone home screen (Telegram, Drive, and Dott) are blurred to keep the focus on Dresser. A video walkthrough will be added when available. Features below are based on the provided screenshots; details that cannot be confirmed from them are not assumed.
 
 ## Application screenshots
 
@@ -10,9 +10,9 @@
 |:--:|:--:|
 | <img src="docs/images/dresser-wardrobe.jpeg" width="270" alt="Wardrobe screen with search and garments"> | <img src="docs/images/dresser-saved-outfits.jpeg" width="270" alt="Saved Outfits screen with Monday look"> |
 
-| Home screen icon | Launch screen |
+| Home screen (other app icons blurred) | Launch screen |
 |:--:|:--:|
-| <img src="docs/images/dresser-home-screen.jpeg" width="270" alt="Dresser hanger app icon on iPhone home screen"> | <img src="docs/images/dresser-splash-screen.jpeg" width="270" alt="Minimalist Dresser launch screen"> |
+| <img src="docs/images/dresser-home-screen.jpeg" width="270" alt="Dresser app icon in focus; Telegram, Drive, and Dott blurred on iPhone home screen"> | <img src="docs/images/dresser-splash-screen.jpeg" width="270" alt="Minimalist Dresser launch screen"> |
 
 ## Features visible in the app
 
@@ -38,6 +38,9 @@ The exact implementation language and minimum supported iOS version should be ch
 2. On macOS, open `Dresser.xcodeproj` in Xcode.
 3. Choose a simulator or a connected iPhone, review signing, and build/run.
 
+## Video demo
+
+_A guided walkthrough will be added here when available._
 
 ## Author
 
