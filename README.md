@@ -33,7 +33,7 @@ The app includes a wardrobe inventory, a search field, an **Outfits** view for s
 | Home screen | Launch screen |
 |:---:|:---:|
 | <img src="docs/images/dresser-home-screen.jpeg" width="245" alt="iPhone home screen showing Dresser; other apps blurred" /> | <img src="docs/images/dresser-splash-screen.jpeg" width="245" alt="Dresser minimal splash screen, no signature" /> |
-| Dresser app icon (other apps blurred) | Updated logo and wordmark |
+| Dresser app icon |
 
 ## Features
 
@@ -58,10 +58,6 @@ git clone https://github.com/msoulamibelhaj/dresser.git
 ```
 
 Open `Dresser.xcodeproj` in Xcode on macOS, choose a simulator or connected iPhone, configure signing if necessary, and run the app.
-
-## Video demo
-
-Coming soon.
 
 ## Author
 
